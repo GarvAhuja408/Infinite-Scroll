@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react"
+import "./Scroll.css";
 
 export default function Scroll(){
 
@@ -9,10 +10,10 @@ export default function Scroll(){
     let fetchdata= async()=>{
         setLoading(true);
 
-        let response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=10&_page=${page}`);
+        let response = await fetch(`https://randomuser.me/api/?results=20&page=${page}`);
 
         let jsonResponse = await response.json();
-        setPosts( (prev)=>[...prev,...jsonResponse] );
+        setPosts( (prev)=>[...prev,...jsonResponse.results] );
 
         setLoading(false);
     }
@@ -39,14 +40,16 @@ export default function Scroll(){
     },[loading]);
 
     return(
-        <div>
+        <div className="container">
 
-            <h3>Scroll till end</h3>
+            <h1 className="heading">Scroll till end</h1>
 
             {posts.map( (post)=> (
                 <div key={post.id}>
-                    <p>{post.title}</p>
-                    <p>{post.body}</p>
+                    <p>{post.name.first} {post.name.last}</p>
+                    <p>{post.gender}</p>
+                    <p>Age:{post.registered.age}</p>
+                    <br></br><br></br>
                 </div>
             ))}
 
