@@ -25,7 +25,7 @@ export default function Scroll(){
     useEffect( ()=>{
         const handleScroll = ()=>{
 
-            const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight-10;
+            const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight;
 
             if(bottom && !loading){
                 setPage( (p)=>p+1 );
@@ -49,6 +49,8 @@ export default function Scroll(){
                     <p>{post.body}</p>
                 </div>
             ))}
+
+            {loading && <p>loading....</p>}
         </div>
     )
 }
